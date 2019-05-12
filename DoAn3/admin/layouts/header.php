@@ -53,40 +53,40 @@
     <!-- Sidebar -->
     <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="../modules/index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Trang chủ</span>
           </a>
         </li>
 
-        <li class="nav-item dropdown" >
-          <a class="nav-link dropdown-toggle" href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown " >
+          <a class="nav-link dropdown-toggle " href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>Tài khoản</span>
           </a>
         </li>
 
 
-        <li class="nav-item dropdown" >
+        <li class="nav-item dropdown " >
           <a class="nav-link dropdown-toggle" href="leader_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>Đội trưởng</span>
           </a>
         </li>
 
-        <li class="nav-item dropdown" >
+        <li class="nav-item dropdown " >
           <a class="nav-link dropdown-toggle" href="schools_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>Khoa viện</span>
           </a>
         </li>
 
-         <li class="nav-item dropdown" >
+         <li class="nav-item dropdown " >
           <a class="nav-link dropdown-toggle" href="page_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>Đội tình nguyện</span>
           </a>
         </li>
 
         
-        <li class="nav-item dropdown" >
+        <li class="nav-item dropdown " >
           <a class="nav-link dropdown-toggle" href="levels_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span>Chức vụ</span>
           </a>

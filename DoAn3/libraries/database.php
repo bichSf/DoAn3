@@ -1,7 +1,7 @@
 <?php 
 
-    class Database
-    {
+class Database
+{
         /**
          * Khai báo biến kết nối
          * @var [type]
@@ -125,6 +125,15 @@
             return true;
         }
 
+        public function deletesql ($table ,  $sql )
+        {
+            $sql = "DELETE FROM {$table} WHERE " .$sql;
+            // _debug($sql);die;
+            mysqli_query($this->link,$sql) or die (" Lỗi Truy Vấn delete   --- " .mysqli_error($this->link));
+            return mysqli_affected_rows($this->link);
+        }
+
+
         public function fetchsql( $sql )
         {
             $result = mysqli_query($this->link,$sql) or die("Lỗi  truy vấn sql " .mysqli_error($this->link));
@@ -155,16 +164,6 @@
             return mysqli_fetch_assoc($result);
         }
 
-        public function deletesql ($table ,  $sql )
-        {
-            $sql = "DELETE FROM {$table} WHERE " .$sql;
-            // _debug($sql);die;
-            mysqli_query($this->link,$sql) or die (" Lỗi Truy Vấn delete   --- " .mysqli_error($this->link));
-            return mysqli_affected_rows($this->link);
-        }
-
-        
-
         public function fetchAll($table)
         {
             $sql = "SELECT * FROM {$table} WHERE 1" ;
@@ -179,81 +178,13 @@
             }
             return $data;
         }
-
-
-        public  function fetchJones($table,$sql,$total = 1,$page,$row ,$pagi = true )
+        
+        public function fetchLeaderOrAdmin ($table ,  $value )
         {
+            $sql = "SELECT * FROM {$table} WHERE id_level = $value ";
 
+            $result = mysqli_query($this->link,$sql) or die("Lỗi Truy Vấn fetchAll " .mysqli_error($this->link));
             $data = [];
-
-            if ($pagi == true )
-            {
-                $sotrang = ceil($total / $row);
-                $start = ($page - 1 ) * $row ;
-                $sql .= " LIMIT $start,$row ";
-                $data = [ "page" => $sotrang];
-
-
-                $result = mysqli_query($this->link,$sql) or die("Lỗi truy vấn fetchJone ---- " .mysqli_error($this->link));
-            }
-            else
-            {
-                $result = mysqli_query($this->link,$sql) or die("Lỗi truy vấn fetchJone ---- " .mysqli_error($this->link));
-            }
-            
-            if( $result)
-            {
-                while ($num = mysqli_fetch_assoc($result))
-                {
-                    $data[] = $num;
-                }
-            }
-            
-            return $data;
-        }
-        public  function fetchJone($table,$sql ,$page = 0,$row ,$pagi = false )
-        {
-
-            $data = [];
-            // _debug($sql);die;
-            if ($pagi == true )
-            {
-                $total = $this->countTable($table);
-                $sotrang = ceil($total / $row);
-                $start = ($page - 1 ) * $row ;
-                $sql .= " LIMIT $start,$row";
-                $data = [ "page" => $sotrang];
-
-                $result = mysqli_query($this->link,$sql) or die("Lỗi truy vấn fetchJone ---- " .mysqli_error($this->link));
-            }
-            else
-            {
-                $result = mysqli_query($this->link,$sql) or die("Lỗi truy vấn fetchJone ---- " .mysqli_error($this->link));
-            }
-            
-            if( $result)
-            {
-                while ($num = mysqli_fetch_assoc($result))
-                {
-                    $data[] = $num;
-                }
-            }
-            // _debug($data);
-            return $data;
-        }
-
-
-        public  function fetchJoneDetail($table , $sql ,$page = 0,$total ,$pagi )
-        {
-            $result = mysqli_query($this->link,$sql) or die("Lỗi truy vấn fetchJone ---- " .mysqli_error($this->link));
-
-            $sotrang = ceil($total / $pagi);
-            $start = ($page - 1 ) * $pagi ;
-            $sql .= " LIMIT $start,$pagi";
-
-            $result = mysqli_query($this->link , $sql);
-            $data = [];
-            $data = [ "page" => $sotrang];
             if( $result)
             {
                 while ($num = mysqli_fetch_assoc($result))
@@ -271,5 +202,5 @@
             return $tien;
         }
     }
-
-    ?>
+    
+?>

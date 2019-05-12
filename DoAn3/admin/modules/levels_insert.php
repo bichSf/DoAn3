@@ -3,23 +3,33 @@
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
   $data=[
-    "level"=>postInput("inputName")
+    "level"=>postInput('inputName')
   ];
   $error=[];
-  if (postInput("inputName")=="")
-    $error[1]="Hãy nhập tên chức vụ";
+  if (postInput('inputName')=='')
+    $error[0]="Hãy nhập tên chức vụ";
+
   if (empty($error))
   {
-    $id_insert=$db->insert("levels",$data);
-    if (  $id_insert>0)
+    $isset=$db->fetchOne("levels","level='".$data['level']."'");
+    if (count($isset)>0)
     {
+      $_SESSION["error"]="Danh mục đã tồn tại.";
+    }
+    else
+    {
+     $id_insert=$db->insert("levels",$data);
+     if ($id_insert>0)
+     {
       $_SESSION["success"]="Tạo mới thành công.";
       redirectAdmin("levels_index.php");
     }
-    else{
+    else
+    {
      $_SESSION["error"]="Tạo mới thất bại.";
    }
  }
+}
 }
 ?>
 
@@ -35,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         <a href="index.php">Trang chủ</a>
       </li>
       <li class="breadcrumb-item active"><a href="levels_index.php">Chức vụ</a></li>
+      <li class="breadcrumb-item active">Thêm mới</li>
     </ol>
 
     <!-- Area Chart Example-->
@@ -42,6 +53,15 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
       <div class="card-header">
         <h1 class="fas fa-chart-area"> Thêm mới danh mục</h1>
       </div>
+      
+      <div class="clearfix">
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
+       
       <div class="row">
         <div class="col-md-12">
           <form action="" method="POST" style="margin-left: 50px">        
@@ -50,8 +70,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
               <label  class="col-sm-2 col-form-label">Tên chức vụ</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="inputName" placeholder="admin">
-                <?php if(isset($error[1]))?>
-                <p class="text-danger"><?php echo $error[1]; ?></p>
+                <?php if(isset($error[0])) {?>
+                  <p class="text-danger"><?php echo $error[0]; ?></p>
+                <?php  }?>
               </div>
             </div>
 

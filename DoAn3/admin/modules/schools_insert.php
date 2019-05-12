@@ -1,28 +1,39 @@
 
 <?php include '../autoload/autoload.php' ;
-
-$data=[
-  "name"=>postInput("inputName")
-];
-$error=[];
-if (postInput("inputName")=="")
-  $error[1]="Hãy nhập tên khoa viện";
-
-if (empty($error))
+if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
-  $id_insert=$db->insert("schools",$data);
-  if (  $id_insert>0)
-  {
-    $_SESSION["success"]="Tạo mới thành công.";
-    redirectAdmin("schools_index.php");
-  }
-  else{
-   $_SESSION["error"]="Tạo mới thất bại.";
- }}
- ?>
+  $data=[
+    "name"=>postInput("inputName")
+  ];
+  $error=[];
+  if (postInput("inputName")=="")
+    $error[1]="Hãy nhập tên khoa viện";
 
- <?php include '../layouts/header.php';?>
- <div id="content-wrapper">
+  if (empty($error))
+  {
+    $isset1=$db->fetchOne("schools","name='".$data['name']."'");
+    if (count($isset1)>0)
+    {
+      $_SESSION["error"]="Tên khoa viện đã tồn tại.";
+    }
+    else
+    {
+      $id_insert=$db->insert("schools",$data);
+      if (  $id_insert>0)
+      {
+        $_SESSION["success"]="Tạo mới thành công.";
+        redirectAdmin("schools_index.php");
+      }
+      else{
+       $_SESSION["error"]="Tạo mới thất bại.";
+     }
+   }
+ }
+}
+?>
+
+<?php include '../layouts/header.php';?>
+<div id="content-wrapper">
 
   <div class="container-fluid">
 
@@ -40,6 +51,13 @@ if (empty($error))
       <div class="card-header">
         <h1 class="fas fa-chart-area"> Thêm mới danh mục</h1>
       </div>
+      <div class="clearfix">
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
       <div class="row">
         <div class="col-md-12">
           <form action="" method="POST" style="margin-left: 50px">
@@ -47,9 +65,9 @@ if (empty($error))
               <label  class="col-sm-2 col-form-label">Tên khoa viện</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="inputName" placeholder="Viện công nghệ thông tin và truyền thông">
-                <?php if(isset($error[1]))?>
-                <p class="text-danger"><?php echo $error[1]; ?></p>
-
+                <?php if(isset($error[1])){?>
+                  <p class="text-danger"><?php echo $error[1]; ?></p>
+                <?php } ?>
               </div>
             </div>
             

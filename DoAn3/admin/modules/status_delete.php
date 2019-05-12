@@ -1,23 +1,23 @@
 
 <?php include '../autoload/autoload.php' ;
 $id=intval(getInput('id'));
-$edit=$db->fetchID('levels',$id);
+$edit=$db->fetchID('statuses',$id);
 if(empty($edit))
 {
   $_SESSION["error"]="Dữ liệu không tồn tại.";
-  redirectAdmin("levels_index.php");
+  redirectAdmin("status_index.php");
 }
 
-$num=$db->delete('levels',$id);
+$num=$db->delete('statuses',$id);
 if($num>0)
 {
  $_SESSION["success"]="Xoá thành công.";
- redirectAdmin("levels_index.php");
+ redirectAdmin("status_index.php");
 }
 else
 {
   $_SESSION["error"]="Xoá thất bại.";
-  redirectAdmin("levels_index.php");
+  redirectAdmin("status_index.php");
 }
 ?>
 

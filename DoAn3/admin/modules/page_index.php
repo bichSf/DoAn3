@@ -94,16 +94,19 @@ $page=$db->fetchAll("team_pages");
           
          <a href="page_insert.php" class="btn btn-success" >Thêm mới</a></h1>
          <div class="clearfix">
-          <?php if (isset($SESSION['success'])) ?>
-          <div class="alert alert-success">
-            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-          </div>
 
-          <?php if (isset($SESSION['error'])) ?>
-          <div class="alert alert-danger">
-            <?php echo $_SESSION['error'];unset($_SESSION['error']); ?>
-          </div>
-        </div>
+          <?php if (isset($_SESSION["success"])) {?>
+           <div class="alert alert-success">
+             <?php echo $_SESSION["success"];unset($_SESSION["success"]);  ?>
+           </div>
+         <?php } ?>
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
+       
         <div class="class row">
           <div class="col-md-12">
             <div class="table-responsive">
@@ -112,7 +115,10 @@ $page=$db->fetchAll("team_pages");
                   <tr>
                     <th scope="col" style="text-align: center">ID</th>
                     <th scope="col" style="text-align: center">Tên đội</th>
-                    <th scope="col" style="text-align: center; width: 500px">Lịch sử</th>
+                    <th scope="col" style="text-align: center">Lịch sử</th>
+                    <th scope="col" style="text-align: center">Dòng trạng thái</th> 
+                    <th scope="col" style="text-align: center">Hình ảnh</th> 
+                    <th scope="col" style="text-align: center">Link</th> 
                     <th scope="col" style="text-align: center">Đội trưởng</th> 
                     <th scope="col" style="text-align: center">Trạng thái khóa</th> 
                     
@@ -122,9 +128,11 @@ $page=$db->fetchAll("team_pages");
                   <?php foreach ($page as $item): ?>
                     <tr>
                       <td><?php echo $item['id'] ?></td>
-                      <td><?php echo $item['name_page'] ?></td>
+                      <td><?php echo $item['name'] ?></td>
                       <td><?php echo $item['history'] ?></td>
                       <td><?php echo $item['status'] ?></td>
+                      <td><?php echo $item['image'] ?></td>
+                      <td><?php echo $item['link'] ?></td>
                       <td><?php echo $item['id_leader'] ?></td>
                       <td><?php echo $item['id_lock_status'] ?></td>
 

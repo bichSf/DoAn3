@@ -17,6 +17,7 @@ $level=$db->fetchAll("levels");
         <a href="#">Trang chủ</a>
       </li>
       <li class="breadcrumb-item active">Chức vụ</li>
+
     </ol>
 
     <!-- Icon Cards-->
@@ -95,54 +96,56 @@ $level=$db->fetchAll("levels");
          <a href="levels_insert.php" class="btn btn-success" >Thêm mới</a></h1>
 
          <div class="clearfix">
-          
-          <?php if (isset($SESSION["success"])) ?>
-          <div class="alert alert-success">
-            <?php echo $_SESSION["success"];unset($_SESSION["success"]);  ?>
-          </div>
 
-          <?php if (isset($SESSION['error'])) ?>
-          <div class="alert alert-danger">
-            <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
-          </div>
-        </div>
-        <div class="class row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table table-bordered table-hover">
-                <thead>
+          <?php if (isset($_SESSION["success"])) {?>
+           <div class="alert alert-success">
+             <?php echo $_SESSION["success"];unset($_SESSION["success"]);  ?>
+           </div>
+         <?php } ?>
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
+       
+       <div class="class row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Chức vụ</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($level as $item): ?>
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Chức vụ</th>
-                    <th scope="col">Action</th>
+                    <td><?php echo $item['id'] ?></td>
+                    <td><?php echo $item['level'] ?></td>
+                    <td>
+                      <a class="btn btn-xs btn-info" href="levels_update.php?id= <?php echo $item['id']  ?>"><i class="fas fa-plus"></i>Sửa</a>
+                      <a class="btn btn-xs btn-danger" href="levels_delete.php?id= <?php echo $item['id']  ?>"><i class="fas fa-times"></i>Xóa</a>
+
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($level as $item): ?>
-                    <tr>
-                      <td><?php echo $item['id'] ?></td>
-                      <td><?php echo $item['level'] ?></td>
-                      <td>
-                        <a class="btn btn-xs btn-info" href="levels_update.php?id= <?php echo $item['id']  ?>"><i class="fas fa-plus"></i>Sửa</a>
-                        <a class="btn btn-xs btn-danger" href="levels_delete.php?id= <?php echo $item['id']  ?>"><i class="fas fa-times"></i>Xóa</a>
+                <?php endforeach ?>
 
-                      </td>
-                    </tr>
-                  <?php endforeach ?>
-
-                </tbody>
-              </table>
-            </div>  
-          </div>
+              </tbody>
+            </table>
+          </div>  
         </div>
-
-
-        <div class="card-body">
-          <canvas id="myAreaChart" width="100%" height="30"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
 
 
-      <!-- /.container-fluid -->
-      <?php include '../layouts/footer.php' ?>
+      <div class="card-body">
+        <canvas id="myAreaChart" width="100%" height="30"></canvas>
+      </div>
+      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+
+
+    <!-- /.container-fluid -->
+    <?php include '../layouts/footer.php' ?>

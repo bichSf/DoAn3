@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
   if (empty($error))
   {
     $id_insert=$db->insert("leaders",$data);
-    if (  $id_insert>0)
+    if ( $id_insert>0)
     {
       $_SESSION["success"]="Tạo mới thành công.";
       redirectAdmin("leader_index.php");
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
       <li class="breadcrumb-item">
         <a href="index.php">Trang chủ</a>
       </li>
-      <li class="breadcrumb-item active"><a href="acc_index.php">Tài khoản</a></li>
+      <li class="breadcrumb-item active"><a href="leader_index.php">Đội trưởng</a></li>
       <li class="breadcrumb-item active">Thêm mới</li>
     </ol>
 
@@ -56,18 +56,19 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="inputClass" placeholder="1">
                 
-                <?php if(isset($error["inputID"]))?>
+                <?php if(isset($error[0])) {?>
                 <p class="text-danger"><?php echo $error[0]; ?></p>
-
+                <?php } ?>
               </div>
             </div>
 
             <div class="form-group row">
               <label  class="col-sm-2 col-form-label">ID khoa viện</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" name="inputName" placeholder="">
-                <?php if(isset($error["inputID"]))?>
+                <input type="text" class="form-control" name="inputIDS" placeholder="">
+                <?php if(isset($error[1])) {?>
                 <p class="text-danger"><?php echo $error[1]; ?></p>
+              <?php } ?>
               </div>
             </div>
             

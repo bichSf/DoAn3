@@ -93,17 +93,19 @@ $school=$db->fetchAll("schools");
         <h1 class="fas fa-chart-area"> Danh sách danh mục
 
          <a href="schools_insert.php" class="btn btn-success" >Thêm mới</a></h1>
-          <div class="clearfix">
-          <?php if (isset($SESSION['success'])) ?>
-          <div class="alert alert-success">
-            <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-          </div>
+         <div class="clearfix">
 
-          <?php if (isset($SESSION['error'])) ?>
-          <div class="alert alert-danger">
-            <?php echo $_SESSION['error'];unset($_SESSION['error']); ?>
-          </div>
-
+          <?php if (isset($_SESSION["success"])) {?>
+           <div class="alert alert-success">
+             <?php echo $_SESSION["success"];unset($_SESSION["success"]);  ?>
+           </div>
+         <?php } ?>
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
          <div class="class row">
           <div class="col-md-12">
             <div class="table-responsive">

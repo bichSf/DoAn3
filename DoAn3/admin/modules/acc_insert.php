@@ -1,44 +1,68 @@
 
 <?php include '../autoload/autoload.php' ;
-
-$data=[
-  "name"=>postInput("inputName"),
-  "birth_date"=>postInput("inputDoB"),
-  "gender"=>postInput("nam"),
-  "hometown"=>postInput("inputHomeT"),
-  "gmail"=>postInput("inputEmail"),
-  "phone"=>postInput("inputPhone"),
-  "id_level"=>postInput("inputName"),
-  "user_name"=>postInput("inputUserName"),
-  "password"=>postInput("inputPassword")
-];
-$error=[];
-if (postInput("inputName")=="")
-  $error[1]="Hãy nhập tên người sở hữu tài khoản";
-if (postInput("inputDoB")=="")
-  $error[2]="Hãy nhập ngày sinh người sở hữu tài khoản";
-if (postInput("inputHomeT")=="")
-  $error[3]="Hãy nhập quê quán người sở hữu tài khoản";
-if (postInput("inputEmail")=="")
-  $error[4]="Hãy nhập email người sở hữu tài khoản";
-if (postInput("inputPhone")=="")
-  $error[5]="Hãy nhập số điện thoại người sở hữu tài khoản";
-if (postInput("inputUserName")=="")
-  $error[6]="Hãy chọn tên tài khoản";
-if (postInput("inputPassword")=="")
-  $error[7]="Hãy nhập mật khẩu tài khoản";
-
-if (empty($error))
+if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
-  $id_insert=$db->insert("acount",$data);
-  if (  $id_insert>0)
+
+  $data=[
+    "name"=>postInput('inputName'),
+    "birth_date"=>postInput('inputDoB'),
+    "gender"=>postInput('nam'),
+    "hometown"=>postInput('inputHomeT'),
+    "email"=>postInput('inputEmail'),
+    "phone"=>postInput('inputPhone'),
+    "id_level"=>postInput('inputName'),
+    "user_name"=>postInput('inputUserName'),
+    "password"=>postInput('inputPassword')
+  ];
+  $error=[];
+  if (postInput('inputName')=='')
+    $error[1]="Hãy nhập tên người sở hữu tài khoản";
+  if (postInput('inputDoB')=='')
+    $error[2]="Hãy nhập ngày sinh người sở hữu tài khoản";
+  if (postInput('inputHomeT')=='')
+    $error[3]="Hãy nhập quê quán người sở hữu tài khoản";
+  if (postInput('inputEmail')=='')
+    $error[4]="Hãy nhập email người sở hữu tài khoản";
+  if (postInput('inputPhone')=='')
+    $error[5]="Hãy nhập số điện thoại người sở hữu tài khoản";
+  if (postInput('inputUserName')=='')
+    $error[6]="Hãy chọn tên tài khoản";
+  if (postInput('inputPassword')=='')
+    $error[7]="Hãy nhập mật khẩu tài khoản";
+
+  if (empty($error))
   {
-    $_SESSION["success"]="Tạo mới thành công.";
-    redirectAdmin("acc_index.php");
-  }
-  else{
-   $_SESSION["error"]="Tạo mới thất bại.";
-  }
+    $isset1=$db->fetchOne("accounts","user_name='".$data['user_name']."'");
+    $isset2=$db->fetchOne("accounts","email='".$data['email']."'");
+    $isset3=$db->fetchOne("accounts","phone='".$data['phone']."'");
+    if ((count($isset1)>0) ||(count($isset2)>0)||(count($isset3)>0))
+    {
+      if (count($isset1)>0)
+      {
+        $_SESSION["error"]="UserName đã tồn tại.";
+      }
+      if (count($isset2)>0)
+      {
+        $_SESSION["error"]="Gmail đã tồn tại.";
+      }
+      if (count($isset3)>0)
+      {
+        $_SESSION["error"]="Số điện thoại đã tồn tại.";
+      }
+    }
+    else
+    {
+      $id_insert=$db->insert("accounts",$data);
+      if (  $id_insert>0)
+      {
+        $_SESSION["success"]="Tạo mới thành công.";
+        redirectAdmin("acc_index.php");
+      }
+      else{
+       $_SESSION["error"]="Tạo mới thất bại.";
+     }
+   }
+ }
 }
 ?>
 
@@ -61,20 +85,33 @@ if (empty($error))
       <div class="card-header">
         <h1 class="fas fa-chart-area"> Thêm mới danh mục</h1>
       </div>
+        <div class="clearfix">
+         <?php if (isset($_SESSION['error'])) {?>
+           <div class="alert alert-danger">
+             <?php echo $_SESSION['error'];unset($_SESSION["error"]); ?>
+           </div>
+         <?php } ?>
+       </div>
       <div class="row">
         <div class="col-md-12">
           <form action="" method="POST" style="margin-left: 50px">
-           
+
             <div class="form-group row">
               <label  class="col-sm-2 col-form-label">Họ tên</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="inputName" placeholder="Trần Thị Bích">
+                <?php if(isset($error[1])) {?>
+                  <p class="text-danger"><?php echo $error[1]; ?></p>
+                <?php  }?>
               </div>
             </div>
             <div class="form-group row">
               <label  class="col-sm-2 col-form-label">Ngày sinh</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" name="inputDoB" placeholder="1998/03/30">
+                <?php if(isset($error[2])) {?>
+                  <p class="text-danger"><?php echo $error[2]; ?></p>
+                <?php  }?>
               </div>
             </div>
             <fieldset class="form-group">
@@ -101,18 +138,27 @@ if (empty($error))
              <label class="col-sm-2 col-form-label">Quê quán</label>
              <div class="col-sm-8">
               <input type="text" class="form-control" name="inputHomeT" placeholder="Bắc Giang">
+              <?php if(isset($error[3])) {?>
+                <p class="text-danger"><?php echo $error[3]; ?></p>
+              <?php  }?>
             </div>
           </div>
           <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-8">
               <input type="email" class="form-control" name="inputEmail" placeholder="Email">
+              <?php if(isset($error[4])) {?>
+                <p class="text-danger"><?php echo $error[4]; ?></p>
+              <?php  }?>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Số điện thoại</label>
             <div class="col-sm-8">
               <input type="number" class="form-control" name="inputPhone" placeholder="Phone number">
+              <?php if(isset($error[5])) {?>
+                <p class="text-danger"><?php echo $error[5]; ?></p>
+              <?php  }?>
             </div>
           </div>
           <fieldset class="form-group">
@@ -134,13 +180,19 @@ if (empty($error))
           <div class="form-group row">
            <label class="col-sm-2 col-form-label">User name</label>
            <div class="col-sm-8">
-            <input type="number" class="form-control" name="inputUserName" placeholder="bichsf">
+            <input type="text" class="form-control" name="inputUserName" placeholder="bichsf">
+            <?php if(isset($error[6])) {?>
+              <p class="text-danger"><?php echo $error[6]; ?></p>
+            <?php  }?>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Mật khẩu</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" name="inputPassword" placeholder="Password">
+            <input type="text" class="form-control" name="inputPassword" placeholder="Password">
+            <?php if(isset($error[7])) {?>
+              <p class="text-danger"><?php echo $error[7]; ?></p>
+            <?php  }?>
           </div>
         </div>
 

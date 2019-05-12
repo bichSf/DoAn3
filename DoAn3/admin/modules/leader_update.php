@@ -5,15 +5,15 @@ $edit=$db->fetchID('leaders',$id);
 if(empty($edit))
 {
   $_SESSION["error"]="Dữ liệu không tồn tại.";
-  redirectAdmin("leader_index.php");
+   redirectAdmin("leader_index.php");
 }
-
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
   $data=[
     "class"=>postInput("inputClass"),
     "id_school"=>postInput("inputIDS"),
   ];
+
   $error=[];
   if (postInput("inputClass")=="")
     $error[0]="Hãy nhập tên lớp mà đội trưởng học";
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
   if (empty($error))
   {
     $id_update=$db->update("leaders",$data, array('id'=>$id));
-    if ( $id_update>0)
+    if ($id_update>0)
     {
       $_SESSION["success"]="Cập nhật thành công.";
       redirectAdmin("leader_index.php");
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
       <li class="breadcrumb-item">
         <a href="index.php">Trang chủ</a>
       </li>
-      <li class="breadcrumb-item active"><a href="acc_index.php">Tài khoản</a></li>
+      <li class="breadcrumb-item active"><a href="acc_index.php">Đội trưởng</a></li>
       <li class="breadcrumb-item active">Thêm mới</li>
     </ol>
 
@@ -61,16 +61,14 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
             <div class="form-group row">
               <label  class="col-sm-2 col-form-label">Tên lớp</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" name="inputClass" placeholder="1">            
+                <input type="text" class="form-control" name="inputClass" placeholder="1" value="<?php echo $edit['class'] ?>">
               </div>
             </div>
 
             <div class="form-group row">
-              <label  class="col-sm-2 col-form-label">ID khoa viện<</label>
+              <label  class="col-sm-2 col-form-label">ID khoa viện</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" name="inputName" placeholder="">
-                <?php if(isset($error[0]) ||isset($error[1]))?>
-                <p class="text-danger"><?php echo "Nhập thông tin 1 trong 2 cột" ; ?></p>
+                <input type="text" class="form-control" name="inputIDS" placeholder="" value="<?php echo $edit['id_school'] ?>">
               </div>
             </div>
             
