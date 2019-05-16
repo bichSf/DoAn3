@@ -2,6 +2,7 @@
 <?php 
 include '../autoload/autoload.php' ;
 $page=$db->fetchAll('team_pages');
+$id=1;
 ?>
 <?php include "layouts/header.php";?>
 <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
@@ -51,21 +52,28 @@ $page=$db->fetchAll('team_pages');
         <div class="col-12 col-lg-12">
             <div class="featured-courses courses-wrap">
                 <div class="row mx-m-25">
-                    <?php foreach ($page as $item): ?>
+                    <?php foreach ($page as $item): 
+                        if ($item['id']==$id){?>
                       <div class="col-12 col-md-4 px-25">
                         <div class="course-content">
-
                             <div class="course-content-wrap"  style="background: url('images/<?php echo $item['image'] ?>');background-size: cover;"> 
                                 <header class="entry-header">
                                     <h2 class="entry-title">
-                                        <a href="$item['link'] " style="color: black"><?php echo $item['name'] ?></a></h2>
+                                        <a href="<?php echo $item['link']?>.php" style="color: black">
+                                            <?php 
+                                            echo $item['name'];
+                                            $id++;                                           
+                                                 //$id[]=$item['id'];
+                                            //header("Location:joinInPage.php");
+                                            ?>
+                                        </a>
+                                    </h2>
                                     <br />  <br />
                                 </header><!-- .entry-header -->
                             </div><!-- .course-content-wrap -->
-                            
                         </div><!-- .course-content -->
                     </div><!-- .col -->   
-                <?php endforeach ?>
+                <?php } endforeach ?>
             </div>
         </div>
     </div>
