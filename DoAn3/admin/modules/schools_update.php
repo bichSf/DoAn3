@@ -67,13 +67,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         <a href="index.php">Trang chủ</a>
       </li>
       <li class="breadcrumb-item active"><a href="schools_index.php">Khoa viện</a></li>
-      <li class="breadcrumb-item">Thêm mới</li>
+      <li class="breadcrumb-item">Sửa mới</li>
     </ol>
 
     <!-- Area Chart Example-->
     <div class="card mb-3">
       <div class="card-header">
-        <h1 class="fas fa-chart-area"> Thêm mới danh mục</h1>
+        <h1 class="fas fa-chart-area"> Sửa danh mục</h1>
       </div>
       <div class="clearfix">
        <?php if (isset($_SESSION['error'])) {?>

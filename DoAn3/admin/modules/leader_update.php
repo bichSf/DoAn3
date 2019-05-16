@@ -2,6 +2,8 @@
 <?php include '../autoload/autoload.php' ;
 $id=intval(getInput('id'));
 $edit=$db->fetchID('leaders',$id);
+$sc=$db->fetchAll('schools');
+
 if(empty($edit))
 {
   $_SESSION["error"]="Dữ liệu không tồn tại.";
@@ -47,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         <a href="index.php">Trang chủ</a>
       </li>
       <li class="breadcrumb-item active"><a href="acc_index.php">Đội trưởng</a></li>
-      <li class="breadcrumb-item active">Thêm mới</li>
+      <li class="breadcrumb-item active">Sửa</li>
     </ol>
 
     <!-- Area Chart Example-->
     <div class="card mb-3">
       <div class="card-header">
-        <h1 class="fas fa-chart-area"> Thêm mới danh mục</h1>
+        <h1 class="fas fa-chart-area"> Sửa danh mục</h1>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -67,9 +69,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 
             <div class="form-group row">
               <label  class="col-sm-2 col-form-label">ID khoa viện</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" name="inputIDS" placeholder="" value="<?php echo $edit['id_school'] ?>">
-              </div>
+              <select class="form-control col-md-8" name="inputIdLeader" id="">
+                  <option value="">-Chọn Khoa viện</option>
+                  <?php foreach ($sc as $item): ?>
+                    <option value="<?php echo $item['id'] ?>"> <?php echo $item['name']  ?></option>
+                  <?php endforeach ?>
+                </select>
+              
             </div>
             
             <div class="form-group row">

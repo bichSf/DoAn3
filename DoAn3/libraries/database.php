@@ -179,11 +179,11 @@ class Database
             return $data;
         }
         
-        public function fetchLeaderOrAdmin ($table ,  $value )
+        public function fetchLeaderOrAdmin ($table,$value )
         {
             $sql = "SELECT * FROM {$table} WHERE id_level = $value ";
 
-            $result = mysqli_query($this->link,$sql) or die("Lỗi Truy Vấn fetchAll " .mysqli_error($this->link));
+            $result = mysqli_query($this->link,$sql) or die("Lỗi Truy Vấn" .mysqli_error($this->link));
             $data = [];
             if( $result)
             {
@@ -201,6 +201,6 @@ class Database
             $tien = mysqli_fetch_assoc($result);
             return $tien;
         }
-    }
+}
     
 ?>

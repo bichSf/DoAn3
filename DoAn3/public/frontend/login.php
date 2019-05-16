@@ -2,34 +2,42 @@
 include '../autoload/autoload.php' ;
 
 //danh muc doi truong
-$leader=$db->fetchLeaderOrAdmin('accounts',2);
+$leader=$db->fetchAll('accounts');
 $stt=$db->fetchAll('statuses');
+
+
+$data=[
+
+	"email"=>postInput("email"),
+	"password"=>postInput("password")
+];
+$error=[];
 
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
-	$data=[
-
-		"email"=>postInput("email"),
-		"password"=>postInput("pass"),
-	];
-	$error=[];
-
 	if (postInput("email")=="")
 		$error[1]="Hãy nhập gmail";
-	if (postInput("pass")=="")
+	if (postInput("password")=="")
 		$error[2]="Hãy nhập mật khẩu";
 
 
 	if (empty($error))
 	{
 
-		$is_check=$db->fetchOne("accounts","email='".$data['email']."' AND password='".$data['pass']."'");
-		if (  $id_check !=NULL)
+		$is_check=$db->fetchOne("accounts","email='".$data['email']."' AND password='".$data['password']."'");
+		if (  $is_check !=NULL)
 		{
 			$_SESSION["name_user"]=$is_check['name'];
-			$_SESSION["name_level"]=$is_check['id_level'];
-			echo "<script>alert('Đăng nhập thành công');location.href='index.php'</script>";
+			$_SESSION["id_user"]=$is_check['id'];
+			$_SESSION["level_user"]=$is_check['id_level'];
 			
+			echo "<script>alert('Đăng nhập thành công')</script>";
+			if ($_SESSION["level_user"]==1) {
+				header("location: ../../admin/modules/index.php");
+			}
+			if ($_SESSION["level_user"]==2) {
+				header("location: ../../leader/modules/leader.php");
+			}
 		}
 		else{
 			$_SESSION["error"]="Đăng nhập thất bại.";
@@ -72,80 +80,78 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 <body style="background-color: rgba(0,0,0,0.1)">
 	
 	<section class="box-main1">
-		<?php if (isset($_SESSION['success'])) {?>
-			<div class="alert alert-success"></div>
-			<strong>Success!</strong><?php echo $_SESSION['success']; unset($_SESSION['success']) ?>
-		<?php } ?>
-		<?php if (isset($_SESSION['error'])): ?>
-			<div class="alert alert-danger"></div>
-			<strong>Success!</strong><?php echo $_SESSION['error']; unset($_SESSION['error']) ?>
-		<?php endif ?>
-	</section>
+		
 
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form action="" method="POST" class="login100-form validate-form" style="background-color: rgba(0,0,0,0.1)">
-					<span class="login100-form-title p-b-43">
-						Login to continue
-						<p style="color: red">Chỉ dành cho admin và đội trưởng</p>
-					</span>
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
-						<?php if(isset($error[1])){?>
-							<p class="text-danger"><?php echo $error[1]; ?></p>
-						<?php } ?>
-					</div>
-					
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
-						<?php if(isset($error[2])){?>
-							<p class="text-danger"><?php echo $error[2]; ?></p>
-						<?php } ?>
-					</div>
+		<div class="limiter">
+			<div class="container-login100">
+				<div class="wrap-login100">
+					<form action="" method="POST" class="login100-form validate-form" style="background-color: rgba(0,0,0,0.1)">
+						<span class="login100-form-title p-b-43">
+							Login to continue
+							<p style="color: red">Chỉ dành cho admin và đội trưởng</p>
+						</span>
 
-					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
+						<?php if (isset($_SESSION['success'])) {?>
+							<div class="alert alert-success"></div>
+							<strong style="color: green">Success!</strong><?php echo $_SESSION['success']; unset($_SESSION['success']) ?>
+						<?php } ?>
+						<?php if (isset($_SESSION['error'])): ?>
+							<div class="alert alert-danger"></div>
+							<strong style="color: red">Error!</strong><?php echo $_SESSION['error']; unset($_SESSION['error']) ?>
+						<?php endif ?>
+
+						<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+							<input class="input100" type="text" name="email" placeholder="Email">
+							<?php if(isset($error[1])){?>
+								<p class="text-danger"><?php echo $error[1]; ?></p>
+							<?php } ?>
 						</div>
 
-						<div>
-							<a href="../../admin/modules/register.php" class="txt1">
-								Register?/
-							</a>
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="../../admin/modules/forgot-password.php" class="txt1">
-								Forgot Password?
-							</a>
+
+						<div class="wrap-input100 validate-input" data-validate="Password is required">
+							<input class="input100" type="password" name="password" placeholder="password">
+							<?php if(isset($error[2])){?>
+								<p class="text-danger"><?php echo $error[2]; ?></p>
+							<?php } ?>
 						</div>
+
+						<div class="flex-sb-m w-full p-t-3 p-b-32" style="margin-top: 50px">
+							<div class="contact100-form-checkbox">
+								<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+								<label class="label-checkbox100" for="ckb1">
+									Remember me
+								</label>
+							</div>
+
+							<div>
+								<a href="../../admin/modules/register.php" class="txt1">
+									Register?/
+								</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="../../admin/modules/forgot-password.php" class="txt1">
+									Forgot Password?
+								</a>
+							</div>
+						</div>
+
+
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn">
+								Login
+							</button>
+						</div>
+
+
+					</form>
+
+					<div class="login100-more" style="background-image: url('images/bgg.jpg');background-repeat:no-repeat; background-position:50px; margin-top:10px;">
+						<div class="back" style="margin:0px 0px 0px 0px;"><a href="index.html"><img src="images/icons/back-icon.png" alt="back" title="Quay trở về" style=" width: 25px; height: 25px"></a></div>;
 					</div>
-
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
-					
-					
-				</form>
-
-				<div class="login100-more" style="background-image: url('images/bgg.jpg');background-repeat:no-repeat; background-position:50px; margin-top:10px;">
-					<div class="back" style="margin:0px 0px 0px 0px;"><a href="index.html"><img src="images/icons/back-icon.png" alt="back" title="Quay trở về" style=" width: 25px; height: 25px"></a></div>;
 				</div>
 			</div>
 		</div>
-	</div>
-	
+	</section>
+
 	
 
 	

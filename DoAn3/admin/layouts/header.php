@@ -34,69 +34,76 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <div style="color: #FFFFFF; margin-left: 650px ">
+     Xin chào <?php echo $_SESSION['name_user'] ?> &nbsp;</div>
+     <!-- Navbar Search -->
+     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
+            <i class="fa fa-search"></i>
           </button>
         </div>
       </div>
     </form>
 
-  </nav>
-
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="../modules/index.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Trang chủ</span>
-          </a>
-        </li>
-
-        <li class="nav-item dropdown " >
-          <a class="nav-link dropdown-toggle " href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Tài khoản</span>
-          </a>
-        </li>
+    <div class="col-md-1" >      
+     <a href="logout.php" style="color: #FFFFFF"> Đăng xuất</a>
+   </div>
 
 
-        <li class="nav-item dropdown " >
-          <a class="nav-link dropdown-toggle" href="leader_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Đội trưởng</span>
-          </a>
-        </li>
+ </nav>
 
-        <li class="nav-item dropdown " >
-          <a class="nav-link dropdown-toggle" href="schools_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Khoa viện</span>
-          </a>
-        </li>
+ <div id="wrapper">
 
-         <li class="nav-item dropdown " >
-          <a class="nav-link dropdown-toggle" href="page_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Đội tình nguyện</span>
-          </a>
-        </li>
+  <!-- Sidebar -->
+  <!-- Sidebar -->
+  <ul class="sidebar navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link" href="../modules/index.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Trang chủ</span>
+      </a>
+    </li>
 
-        
-        <li class="nav-item dropdown " >
-          <a class="nav-link dropdown-toggle" href="levels_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Chức vụ</span>
-          </a>
-        </li>
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle " href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Tài khoản</span>
+      </a>
+    </li>
 
 
-        <li class="nav-item dropdown" >
-          <a class="nav-link dropdown-toggle" href="status_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Trạng thái</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle" href="leader_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Đội trưởng</span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle" href="schools_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Khoa viện</span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle" href="page_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Đội tình nguyện</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle" href="levels_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Chức vụ</span>
+      </a>
+    </li>
+
+
+    <li class="nav-item dropdown" >
+      <a class="nav-link dropdown-toggle" href="status_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Trạng thái</span>
+      </a>
+    </li>
+  </ul>
+</nav>

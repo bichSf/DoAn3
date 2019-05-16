@@ -57,7 +57,8 @@ $page=$db->fetchAll('team_pages');
 
                             <div class="course-content-wrap"  style="background: url('images/<?php echo $item['image'] ?>');background-size: cover;"> 
                                 <header class="entry-header">
-                                    <h2 class="entry-title"><a href="joinInPage.php" style="color: black"><?php echo $item['name'] ?></a></h2>
+                                    <h2 class="entry-title">
+                                        <a href="$item['link'] " style="color: black"><?php echo $item['name'] ?></a></h2>
                                     <br />  <br />
                                 </header><!-- .entry-header -->
                             </div><!-- .course-content-wrap -->
