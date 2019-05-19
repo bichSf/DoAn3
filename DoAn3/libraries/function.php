@@ -1,6 +1,6 @@
 <?php 
 
-    
+
     /**
      *  input
      */
@@ -28,33 +28,9 @@
         return $url  = "http://localhost/Webphp/DoAn3/"; 
     }
 
-
-    function public_admin()
-    {
-        return base_url() . "public/admin/";
-    }
-
-    function public_frontend()
-    {
-        return base_url() . "public/frontend/";
-    }
-
     function modules($url)
     {
         return base_url() . "admin/modules/" .$url ;
-    }
-
-    function uploads()
-    {
-        return base_url() . "public/uploads/";
-    }
-    
-     if ( ! function_exists('redirectStyle'))
-    {
-        function redirectStyle($url = "")
-        {
-            header("location: ".base_url()."{$url}");exit();
-        }
     }
 
     /**
@@ -68,8 +44,13 @@
         }
     }
 
-
-
+    if ( ! function_exists('redirectLeader'))
+    {
+        function redirectLeader($url = "")
+        {
+            header("location: ".base_url()."leader/modules/{$url}");exit();
+        }
+    }
     /**
      *  redirect về các trang 
      */
@@ -81,5 +62,4 @@
         }
     }
 
-
- ?>
+    ?>

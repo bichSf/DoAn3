@@ -21,11 +21,9 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url() ?>public/admin/css/sb-admin.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
-
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="../modules/index.php">SVTN HUST</a>
@@ -35,27 +33,26 @@
     </button>
 
     <div style="color: #FFFFFF; margin-left: 650px ">
-     Xin chào <?php echo $_SESSION['name_user'] ?> &nbsp;</div>
-     <!-- Navbar Search -->
-     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
-    <div class="col-md-1" >      
-     <a href="logout.php" style="color: #FFFFFF"> Đăng xuất</a>
+     Xin chào <?php echo $_SESSION['name_user'] ?> &nbsp;
    </div>
+   <!-- Navbar Search -->
+   <form action="search.php" method="get" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    <div class="input-group">
+      <input name="timkiem" type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
 
+  <div class="col-md-1" >      
+   <a href="logout.php" style="color: #FFFFFF"> Đăng xuất</a>
+ </div>
+</nav>
 
- </nav>
-
- <div id="wrapper">
+<div id="wrapper">
 
   <!-- Sidebar -->
   <!-- Sidebar -->
@@ -68,8 +65,14 @@
     </li>
 
     <li class="nav-item dropdown " >
+      <a class="nav-link dropdown-toggle " href="myacc_index.php" pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Thông tin cá nhân</span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown " >
       <a class="nav-link dropdown-toggle " href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span>Tài khoản</span>
+        <span>Admin</span>
       </a>
     </li>
 
@@ -106,4 +109,4 @@
       </a>
     </li>
   </ul>
-</nav>
+

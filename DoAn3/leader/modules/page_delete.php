@@ -1,23 +1,23 @@
 
 <?php include '../autoload/autoload.php' ;
 $id=intval(getInput('id'));
-$edit=$db->fetchID('accounts',$id);
+$edit=$db->fetchID('team_pages',$id);
 if(empty($edit))
 {
   $_SESSION["error"]="Dữ liệu không tồn tại.";
-  redirectAdmin("acc_index.php");
+  redirectLeader("page_index.php");
 }
 
-$num=$db->updateState('accounts',1,$id);
+$num=$db->updateState('team_pages',2,$id);
 if($num>0)
 {
  $_SESSION["success"]="Xoá thành công.";
- redirectAdmin("acc_index.php");
+ redirectLeader("page_index.php");
 }
 else
 {
   $_SESSION["error"]="Xoá thất bại.";
-  redirectAdmin("acc_index.php");
+  redirectLeader("page_index.php");
 }
 ?>
 

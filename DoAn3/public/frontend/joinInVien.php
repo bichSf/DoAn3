@@ -1,18 +1,18 @@
 <?php 
 include '../autoload/autoload.php' ;
-$sql1= "select * from team_pages where state=0";
-$page2=$db->fetchsql( $sql1 );
-$data2=[];
-foreach ($page2 as $item2) {
-    $data2[$item2['id']]=$item2;
-}
 
-$sql= "select * from schools where state=0";
-$page=$db->fetchsql( $sql );
+$id=intval(getInput('id'));
+$sql2="select *from schools where id=$id";
+$sql="select *from team_pages where id_school=$id and state=0";
+$scc=$db->fetchsql($sql2);
+$page=$db->fetchsql($sql);
+
+$page2=$db->fetchAll('schools');
 $data=[];
-foreach ($page as $item) {
+foreach ($page2 as $item) {
     $data[$item['id']]=$item;
 }
+
 ?>
 
 <?php include "layouts/header.php" ?>
@@ -50,22 +50,28 @@ foreach ($page as $item) {
 
 <div class="container" >
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-lg-8">
             <div class="breadcrumbs">
                 <ul class="flex flex-wrap align-items-center p-0 m-0">
                     <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-                    <li>Khoa viện</li>
+                    <li><a href="khoaVien.php">Khoa viện</a></li>
+                    <li><?php foreach ($scc as $item) {
+                        echo $item['name'];
+                    }  ?></li>
                 </ul>
             </div><!-- .breadcrumbs -->
         </div><!-- .col -->
     </div><!-- .row -->
-
     <div class="row">
-        <div class="col-12 col-lg-7" style="margin-top: -60px">
+        <div class="col-12 col-lg-6">
             <div class="blog-posts">
                 <div class="row mx-m-25">
                     <div class="row mx-m-25">
-                        <?php foreach ($data2 as $item2): ?>
+                        <?php if ($page==null): ?>
+                            <p style="margin-left: 70px">Không có kết quả phù hợp</p>
+                        <?php endif ?>
+                        <?php 
+                        foreach ($page as $item2): ?>
                             <div class="col-12 col-md-6 px-25">
                                 <div class="course-content">
                                     <div class="course-content-wrap"  style="background: url('images/<?php echo $item2['image'] ?>');background-size: cover;"> 
@@ -83,12 +89,13 @@ foreach ($page as $item) {
                                 </div><!-- .course-content -->
                             </div><!-- .col -->   
                         <?php  endforeach ?>
-                    </div><!-- .col -->   
+                    </div>
                 </div><!-- .col -->
-            </div>
-        </div><!-- .col -->
-        <div class="col-12 col-lg-1"></div>
- <div class="col-12 col-lg-4" style="margin-top: -100px;">
+            </div><!-- .col -->
+        </div>
+
+        <div class="col-12 col-lg-2"></div>
+        <div class="col-12 col-lg-4" style="margin-top: -100px;">
             <div class="sidebar">
                 <div class="cat-links">
                     <h2><strong>Khoa viện</strong></h2>
@@ -109,3 +116,4 @@ foreach ($page as $item) {
 
 </div>
 <?php include "layouts/footer.php" ?>
+

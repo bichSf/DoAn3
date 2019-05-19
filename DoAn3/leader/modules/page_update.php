@@ -9,7 +9,7 @@ $edit=$db->fetchID('team_pages',$id);
 if(empty($edit))
 {
   $_SESSION["error"]="Dữ liệu không tồn tại.";
-  redirectAdmin("page_index.php");
+  redirectLeader("page_index.php");
 }
 
 if ($_SERVER["REQUEST_METHOD"]=="POST")
@@ -63,11 +63,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         if (  $id_update>0)
         {
           $_SESSION["success"]="Cập nhật thành công.";
-          redirectAdmin("page_index.php");
+          redirectLeader("page_index.php");
         }
         else{
          $_SESSION["error"]="Cập nhật thất bại.";
-         redirectAdmin("page_index.php");
+         redirectLeader("page_index.php");
        }
      }
    }
@@ -77,11 +77,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
     if (  $id_update>0)
     {
       $_SESSION["success"]="Cập nhật thành công.";
-      redirectAdmin("page_index.php");
+      redirectLeader("page_index.php");
     }
     else{
      $_SESSION["error"]="Cập nhật thất bại.";
-     redirectAdmin("page_index.php");
+     redirectLeader("page_index.php");
    }
  }
 }

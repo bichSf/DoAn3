@@ -8,7 +8,7 @@ if(empty($edit))
   redirectAdmin("page_index.php");
 }
 
-$num=$db->delete('team_pages',$id);
+$num=$db->updateState('team_pages',1,$id);
 if($num>0)
 {
  $_SESSION["success"]="Xoá thành công.";

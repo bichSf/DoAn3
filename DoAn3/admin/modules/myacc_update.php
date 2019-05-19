@@ -6,7 +6,7 @@ if(empty($edit))
 {
 
   $_SESSION["error"]="Dữ liệu không tồn tại.";
-  redirectLeader("acc_index.php");
+  redirectAdmin("acc_index.php");
 }
 if ($_SERVER["REQUEST_METHOD"]=="POST")
 {
@@ -66,11 +66,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
        if ($id_update>0)
        {
         $_SESSION["success"]="Cập nhật thành công.";
-        redirectLeader("acc_index.php");
+        redirectAdmin("acc_index.php");
       }
       else{
        $_SESSION["error"]="Cập nhật thất bại.";
-       redirectLeader("acc_index.php");
+       redirectAdmin("acc_index.php");
      }
    }
 
@@ -81,11 +81,11 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
   if ($id_update>0)
   {
     $_SESSION["success"]="Cập nhật thành công.";
-    redirectLeader("acc_index.php");
+    redirectAdmin("acc_index.php");
   }
   else{
    $_SESSION["error"]="Cập nhật thất bại.";
-   redirectLeader("acc_index.php");
+   redirectAdmin("acc_index.php");
  }
 }
 }
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
         <a href="index.php">Trang chủ</a>
       </li>
       <li class="breadcrumb-item active"><a href="acc_index.php">Tài khoản</a></li>
-      <li class="breadcrumb-item active">Sửa mới</li>
+      <li class="breadcrumb-item active">Sửa</li>
     </ol>
 
     <!-- Area Chart Example-->

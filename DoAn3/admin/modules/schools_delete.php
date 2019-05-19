@@ -8,7 +8,7 @@ if(empty($edit))
   redirectAdmin("schools_index.php");
 }
 
-$num=$db->delete('schools',$id);
+$num=$db->updateState('schools',1,$id);
 if($num>0)
 {
  $_SESSION["success"]="Xoá thành công.";

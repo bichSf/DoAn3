@@ -1,6 +1,11 @@
 
 <?php include '../autoload/autoload.php' ;
-$acc=$db->fetchAll("accounts");
+$sql="select *from accounts where id = '".$_SESSION["id_user"]."'";
+$acc=$db->fetchsql($sql);
+$leader=$db->fetchAll("leaders");
+$school=$db->fetchAll("schools");
+$page=$db->fetchAll("team_pages");
+$level=$db->fetchAll("levels");
 
 ?>
 
@@ -16,83 +21,15 @@ $acc=$db->fetchAll("accounts");
       <li class="breadcrumb-item">
         <a href="#">Trang chủ</a>
       </li>
-      <li class="breadcrumb-item active">Tài khoản</li>
+      <li class="breadcrumb-item active">Đội trưởng</li>
     </ol>
 
-    <!-- Icon Cards-->
-    <div class="row">
-      <div class="col-xl-3 col-sm-6 mb-3">
-        <div class="card text-white bg-primary o-hidden h-100">
-          <div class="card-body">
-            <div class="card-body-icon">
-              <i class="fas fa-fw fa-comments"></i>
-            </div>
-            <div class="mr-5">26 New Messages!</div>
-          </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 mb-3">
-        <div class="card text-white bg-warning o-hidden h-100">
-          <div class="card-body">
-            <div class="card-body-icon">
-              <i class="fas fa-fw fa-list"></i>
-            </div>
-            <div class="mr-5">11 New Tasks!</div>
-          </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 mb-3">
-        <div class="card text-white bg-success o-hidden h-100">
-          <div class="card-body">
-            <div class="card-body-icon">
-              <i class="fas fa-fw fa-shopping-cart"></i>
-            </div>
-            <div class="mr-5">123 New Orders!</div>
-          </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-      <div class="col-xl-3 col-sm-6 mb-3">
-        <div class="card text-white bg-danger o-hidden h-100">
-          <div class="card-body">
-            <div class="card-body-icon">
-              <i class="fas fa-fw fa-life-ring"></i>
-            </div>
-            <div class="mr-5">13 New Tickets!</div>
-          </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fas fa-angle-right"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <?php include '../layouts/info.php';?>
 
     <!-- Area Chart Example-->
     <div class="card mb-3">
       <div class="card-header">
-        <h1 class="fas fa-chart-area"> Danh sách danh mục
-
-         <a href="acc_insert.php" class="btn btn-success" >Thêm mới</a></h1>
+        <h1 class="fas fa-chart-area"> Danh sách danh mục</h1>
 
          <div class="clearfix">
 
@@ -113,81 +50,73 @@ $acc=$db->fetchAll("accounts");
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th scope="col" style="text-align: center">ID</th>
-                  <th scope="col" style="text-align: center">Họ và tên</th>
-                  <th scope="col" style="text-align: center">Ngày sinh</th>
-                  <th scope="col" style="text-align: center">Giới tính</th>
-                  <th scope="col" style="text-align: center">Quê quán</th> 
-                  <th scope="col" style="text-align: center">Gmail</th> 
-                  <th scope="col" style="text-align: center">Số điện thoại</th> 
-                  <th scope="col" style="text-align: center">Chức vụ</th> 
-                  <th scope="col" style="text-align: center">Tên đăng nhập</th> 
-                  <th scope="col" style="text-align: center">Mật khẩu</th> 
-                  <th scope="col" style="text-align: center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                $id=$_SESSION['id_user'];
-                $item=$db->fetchOne("accounts"," id= '".$id."' ");?>          
-                <tr>
-                  <td><?php echo $item['id'] ?></td>
-                  <td><?php echo $item['name'] ?></td>
-                  <td><?php echo $item['birth_date'] ?></td>
-                  <td><?php echo $item['gender'] ?></td>
-                  <td><?php echo $item['hometown'] ?></td>
-                  <td><?php echo $item['email'] ?></td>
-                  <td><?php echo $item['phone'] ?></td>
-                  <td><?php echo $item['id_level'] ?></td>
-                  <td><?php echo $item['user_name'] ?></td>
-                  <td><?php echo $item['password'] ?></td>
+                 <th scope="col" style="text-align: center">ID</th>
+                 <th scope="col" style="text-align: center">Họ và tên</th>
+                 <th scope="col" style="text-align: center">Ngày sinh</th>
+                 <th scope="col" style="text-align: center">Giới tính</th>
+                 <th scope="col" style="text-align: center">Quê quán</th> 
+                 <th scope="col" style="text-align: center">Gmail</th> 
+                 <th scope="col" style="text-align: center">Số điện thoại</th> 
+                 <th scope="col" style="text-align: center">Chức vụ</th> 
+                 <th scope="col" style="text-align: center">Tên đăng nhập</th> 
+                 <th scope="col">Lớp</th>
+                 <th scope="col">Viện</th>
+                 <th scope="col">Đội trưởng đội</th>
+                 <th scope="col">State</th>
 
-                  <td>
-                    <a class="btn btn-xs btn-info" href="acc_update.php?id= <?php echo $item['id']  ?>"><i class="fas fa-plus"></i>Sửa</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>  
-        </div>
-      </div>
-      <div class="class row">
-        <div class="col-md-12">
-          <div class="table-responsive">
-            <p></p>
-            <table class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Lớp</th>
-                  <th scope="col">Viện</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-               <?php
-               $id=$_SESSION['id_user'];
-               $item=$db->fetchOne("leaders"," id_acc= '".$id."' ");
-               $item1=$db->fetchOne("schools"," id= '".$item['id_school']."' ");
-               ?>  
-               <tr>
-                <td><?php echo $item['class'] ?></td>
-                <td><?php echo $item1['name'] ?></td>
-                <td>
-                  <a class="btn btn-xs btn-info" href="leader_update.php?id= <?php echo $item['id']  ?>"><i class="fas fa-plus"></i>Sửa</a>
+                 <th scope="col">Action</th>
+               </tr>
+             </thead>
+             <tbody>
+              <?php foreach ($acc as $item1) : ?>
+                <?php foreach ($leader as $item): ?>
+                  <?php foreach ($school as $item2): ?>
+                    <?php foreach ($page as $item3): ?>
+                      <?php foreach ($level as $item4): ?>
+                        <?php if($item1['id_level']==$item4['id']): ?>
+                          <?php if (($item['id_acc']==$item1['id'])&&($item['id_school']==$item2['id'])&&($item3['id_leader']==$item['id'])): ?>
+                          <tr>
+                            <td><?php echo $item1['id'] ?></td>
+                            <td><?php echo $item1['name'] ?></td>
+                            <td><?php echo $item1['birth_date'] ?></td>
+                            <td><?php echo $item1['gender'] ?></td>
+                            <td><?php echo $item1['hometown'] ?></td>
+                            <td><?php echo $item1['email'] ?></td>
+                            <td><?php echo $item1['phone'] ?></td>
+                            <td><?php echo $item4['level'] ?></td>
+                            <td><?php echo $item1['user_name'] ?></td>
+                            <td ><?php echo $item['class'] ?></td>
+                            <td><?php echo $item2['name'] ?></td>
+                            <td><?php echo $item3['name'] ?></td>
+                            <td><?php if($item1['state']==0) echo "Hoạt động"; elseif ($item1['state']==1) echo "Bị khóa"; else echo "Tự khóa";?></td>
 
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>  
-      </div>
+                            <td>
+                              <a class="btn btn-xs btn-info" href="acc_update.php?id= <?php echo $item['id_acc']  ?>"><i class="fas fa-plus"></i>Sửa</a>
+                              <a class="btn btn-xs btn-danger" href="acc_delete.php?id= <?php echo $item['id_acc']  ?>"><i class="fas fa-times"></i>Xóa</a>
+
+                            </td>
+                          </tr>
+                        <?php endif ?>
+                      <?php endif ?>
+                    <?php endforeach ?>
+                  <?php endforeach ?>
+                <?php endforeach ?>
+              <?php endforeach ?>
+            <?php endforeach ?>
+
+          </tbody>
+        </table>
+      </div>  
     </div>
-    <div class="card-body">
-      <canvas id="myAreaChart" width="100%" height="30"></canvas>
-    </div>
-    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
   </div>
 
+  <div class="card-body">
+    <canvas id="myAreaChart" width="100%" height="30"></canvas>
+  </div>
+  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
 </div>
+
+
 <!-- /.container-fluid -->
 <?php include '../layouts/footer.php' ?>

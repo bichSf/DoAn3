@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 		$is_check=$db->fetchOne("accounts","email='".$data['email']."' AND password='".$data['password']."'");
 		if (  $is_check !=NULL)
 		{
-			$_SESSION["name_user"]=$is_check['name'];
+			$_SESSION["name_user"]=$is_check['user_name'];
 			$_SESSION["id_user"]=$is_check['id'];
 			$_SESSION["level_user"]=$is_check['id_level'];
 			
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 				header("location: ../../admin/modules/index.php");
 			}
 			if ($_SESSION["level_user"]==2) {
-				header("location: ../../leader/modules/leader.php");
+				header("location: ../../leader/modules/acc_index.php");
 			}
 		}
 		else{
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST")
 					</form>
 
 					<div class="login100-more" style="background-image: url('images/bgg.jpg');background-repeat:no-repeat; background-position:50px; margin-top:10px;">
-						<div class="back" style="margin:0px 0px 0px 0px;"><a href="index.html"><img src="images/icons/back-icon.png" alt="back" title="Quay trở về" style=" width: 25px; height: 25px"></a></div>;
+						<div class="back" style="margin:0px 0px 0px 0px;"><a href="index.php"><img src="images/icons/back-icon.png" alt="back" title="Quay trở về" style=" width: 25px; height: 25px"></a></div>;
 					</div>
 				</div>
 			</div>

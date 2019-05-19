@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,18 +27,8 @@
     <link rel="stylesheet" href="style.css">
 
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-
 </head>
-<script src="ajax.js" type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
 
-
-        $('.timkiem').keyup(function() {
-            alert(('.timkiem').val());
-        });
-
-    });
-</script>
 <body class="courses-page">
     <div class="page-header">
         <header class="site-header">
@@ -52,9 +43,9 @@
 
                        <div class="col-12 col-lg-6 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                         <div class="header-bar-search">
-                            <form class="flex align-items-stretch">
-                                <input class="timkiem" type="search" placeholder="Tìm kiếm ...">
-                                <button type="submit" value="" class="flex justify-content-center align-items-center" title="Tìm kiếm" style="background: #CC0909"><i class="fa fa-search"></i>
+                            <form action="search.php" method="get" class="flex align-items-stretch">
+                                <input name="timkiem" type="search" placeholder="Tìm kiếm ...">
+                                <button type="submit" name="search" class="flex justify-content-center align-items-center" title="Tìm kiếm" style="background: #CC0909"><i class="fa fa-search"></i>
                                 </button>
                             </form>
                         </div><!-- .header-bar-search -->

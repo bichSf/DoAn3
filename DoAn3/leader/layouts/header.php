@@ -34,19 +34,9 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <div style="color: #FFFFFF; margin-left: 650px; ">
+    <div style="color: #FFFFFF; margin-left: 900px; ">
      Xin chào <?php echo $_SESSION['name_user'] ?> &nbsp;</div>
-     <!-- Navbar Search -->
-     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+
 
     <div class="col-md-1" >      
      <a href="logout.php" style="color: #FFFFFF"> Đăng xuất</a>
@@ -66,17 +56,17 @@
         <span>Trang chủ</span>
       </a>
     </li>
-
+    <li class="nav-item dropdown" >
+      <a class="nav-link dropdown-toggle" href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>Thông tin tài khoản</span>
+      </a>
+    </li>
     <li class="nav-item dropdown " >
       <a class="nav-link dropdown-toggle" href="page_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span>Đội tình nguyện</span>
       </a>
     </li>
 
-    <li class="nav-item dropdown" >
-      <a class="nav-link dropdown-toggle" href="acc_index.php" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span>Thông tin tài khoản</span>
-      </a>
-    </li>
+    
   </ul>
 </nav>

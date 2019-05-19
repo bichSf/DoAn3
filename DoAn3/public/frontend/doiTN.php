@@ -1,8 +1,13 @@
 
 <?php 
 include '../autoload/autoload.php' ;
-$page=$db->fetchAll('team_pages');
-$id=1;
+$sql= "select * from team_pages where state=0";
+$page=$db->fetchsql( $sql );
+$data=[];
+foreach ($page as $item) {
+   // $id=intval($item['id']);
+    $data[$item['id']]=$item;
+}
 ?>
 <?php include "layouts/header.php";?>
 <div class="col-3 col-lg-9 flex justify-content-end align-content-center">
@@ -41,8 +46,8 @@ $id=1;
         <div class="col-12">
             <div class="breadcrumbs">
                 <ul class="flex flex-wrap align-items-center p-0 m-0">
-                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                    <li>Đội tình nguyện</li>
+                    <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="doiTN.php">Đội tình nguyện</a></li>
                 </ul>
             </div><!-- .breadcrumbs -->
         </div><!-- .col -->
@@ -52,32 +57,31 @@ $id=1;
         <div class="col-12 col-lg-12">
             <div class="featured-courses courses-wrap">
                 <div class="row mx-m-25">
-                    <?php foreach ($page as $item): 
-                        if ($item['id']==$id){?>
-                      <div class="col-12 col-md-4 px-25">
-                        <div class="course-content">
-                            <div class="course-content-wrap"  style="background: url('images/<?php echo $item['image'] ?>');background-size: cover;"> 
-                                <header class="entry-header">
-                                    <h2 class="entry-title">
-                                        <a href="<?php echo $item['link']?>.php" style="color: black">
-                                            <?php 
-                                            echo $item['name'];
-                                            $id++;                                           
+                    <?php foreach ($data as $item): ?>
+                        <div class="col-12 col-md-4 px-25">
+                            <div class="course-content">
+                                <div class="course-content-wrap"  style="background: url('images/<?php echo $item['image'] ?>');background-size: cover;"> 
+                                    <header class="entry-header">
+                                        <h2 class="entry-title">
+                                            <a href="joinInPage.php?id=<?php echo $item['id'] ?>" style="color: black">
+                                                <?php 
+                                                echo $item['name'];
+
                                                  //$id[]=$item['id'];
                                             //header("Location:joinInPage.php");
-                                            ?>
-                                        </a>
-                                    </h2>
-                                    <br />  <br />
-                                </header><!-- .entry-header -->
-                            </div><!-- .course-content-wrap -->
-                        </div><!-- .course-content -->
-                    </div><!-- .col -->   
-                <?php } endforeach ?>
+                                                ?>
+                                            </a>
+                                        </h2>
+                                        <br />  <br />
+                                    </header><!-- .entry-header -->
+                                </div><!-- .course-content-wrap -->
+                            </div><!-- .course-content -->
+                        </div><!-- .col -->   
+                    <?php  endforeach ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <div><br></div>
 <?php include "layouts/footer.php" ?>
